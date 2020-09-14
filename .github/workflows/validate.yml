@@ -1,0 +1,24 @@
+on:
+  push:
+    branches:    
+      - validate
+
+name: Validate
+jobs:
+  validate:
+    name: Validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '2.7'
+
+      - name: Validate
+        run: |
+            pip install -U functools32
+            pip install -U jsonschema
+            ./validate.py
